@@ -1,12 +1,12 @@
 #include <SPI.h>
 #include <ESP8266WiFi.h>
 
-char ssid[] = "JioFi3_078DD9";           
-char pass[] = "ckcmkcu6ah";           
+char ssid[] = "JioFi3_078DD9";       // your WiFi SSID    
+char pass[] = "ckcmkcu6ah";          // your WiFi password 
 
 unsigned long askTimer = 0;
 
-IPAddress server(192,168,225,129);      //ip address of master and slave should be same s
+IPAddress server(192,168,225,129);      //ip address of server (in our case: IP address of PC)
 WiFiClient client;
 
 void setup() {
@@ -16,17 +16,15 @@ void setup() {
     Serial.print(".");
     delay(500);
   }
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP()); 
+  //Serial.println("IP address: ");
+  //Serial.println(WiFi.localIP()); 
   
 }
 
 void loop () {
   client.connect(server, 80);   
-   
-  //Serial.println(".");
   
-  String answer = client.readStringUntil('\r');   // receives the answer from the sever
+  String answer = client.readStringUntil('\r');   // receives the message from the sever
   Serial.println("from server: " + answer);
  
 }
